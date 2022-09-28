@@ -1,16 +1,20 @@
 import { createServer, Model, RestSerializer } from 'miragejs';
 import { RouteMirage } from 'src/mirage/models/RouteMirage.model';
+import { partnerFactory } from './factories/Partner';
 import { getPartnerRoutes } from './routes/Partner';
 
 // All endpoints
 const allRoutes = [...getPartnerRoutes()];
 // All models
-const allModels = { partner: Model }
+const allModels = { partner: Model };
+// All factories
+const allFactories = { partnerFactory };
 
 export function makeServer({ environment = "test" } = {}) {
   return createServer({
     environment,
     models: allModels,
+    factories: allFactories,
 
     /**
      * Declare all endpoints here.
