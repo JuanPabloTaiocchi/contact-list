@@ -9,7 +9,7 @@ const allRoutes = [...getPartnerRoutes()];
 // All models
 const allModels = { partner: Model };
 // All factories
-const allFactories = { partnerFactory };
+const allFactories = { partner: partnerFactory };
 const allSeeds = (server: Server) => partnerSeed(server);
 
 export function makeServer({ environment = "test" } = {}) {

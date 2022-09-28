@@ -12,7 +12,7 @@ if (environment.production) {
  * Mocking server if in develop mode
  */
 if (!environment.production) {
-  makeServer({ environment: "development" })
+  makeServer({ environment: "development" });
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
