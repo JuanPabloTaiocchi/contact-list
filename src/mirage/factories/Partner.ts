@@ -11,7 +11,7 @@ export const partnerFactory = Factory.extend<Partial<PartnerExtended>>({
   country(){ return faker.address.country(); },
   webSite() { return faker.internet.url(); },
   vat() { return faker.datatype.string(8); },
-  fiscalcode() { return faker.datatype.string(16); },
+  fiscalCode() { return faker.datatype.string(16); },
   mobile(){ return faker.phone.number(); },
   email(){ return faker.internet.email(); },
   photo(){ return faker.image.avatar(); }
