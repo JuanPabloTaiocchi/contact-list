@@ -13,3 +13,7 @@ export interface PartnerExtended extends Partner {
   photo: string;
   [index: string]: any;
 }
+
+export const getPartnerString = (partner: PartnerExtended): string => {
+  return `${partner.name} ${partner.surname}`;
+}
