@@ -1,71 +1,134 @@
-<form>
-  <h1>{{ formTitle }}</h1>
-  <div class="row mb-4">
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" id="form6Example1" class="form-control" />
-        <label class="form-label" for="form6Example1">Nome</label>
+<ng-container *ngIf="{
+  partner: partner$ | async
+} as obs">
+  <!-- Modal Header -->
+  <div class="modal-header">
+    <h4 class="modal-title">{{ formTitle }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <!-- Modal Body -->
+  <div class="modal-body">
+    <form>
+      <!-- Nome e Cognome -->
+      <div class="row mb-4">
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Nome
+          </label>
+          <input
+            class="form-control"
+            id="name"
+            value="{{ obs.partner?.name }}"
+          >
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Cognome
+          </label>
+          <input
+            class="form-control"
+            id="surname"
+            value="{{ obs.partner?.surname }}"
+          >
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" id="form6Example2" class="form-control" />
-        <label class="form-label" for="form6Example2">Cognome</label>
+      <!-- Numero di Telefono e Codice Fiscale -->
+      <div class="row mb-4">
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Numero di Telefono
+          </label>
+          <input
+            class="form-control"
+            id="mobile"
+            value="{{ obs.partner?.mobile }}"
+          >
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Codice Fiscale
+          </label>
+          <input
+            class="form-control"
+            id="fiscalCode"
+            value="{{ obs.partner?.fiscalCode }}"
+          >
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Text input -->
-  <div class="form-outline mb-4">
-    <input type="text" id="form6Example3" class="form-control" />
-    <label class="form-label" for="form6Example3">Sito web</label>
-  </div>
-
-  <!-- Text input -->
-  <div class="form-outline mb-4">
-    <input type="text" id="form6Example4" class="form-control" />
-    <label class="form-label" for="form6Example4">Via</label>
-  </div>
-
-  <div class="row mb-4">
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" id="form6Example1" class="form-control" />
-        <label class="form-label" for="form6Example1">Address</label>
+      <!-- Indirizzo e CAP -->
+      <div class="row mb-4">
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Indirizzo
+          </label>
+          <input
+            class="form-control"
+            id="street"
+            value="{{ obs.partner?.street }}"
+          >
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            CAP
+          </label>
+          <input
+            class="form-control"
+            id="zip"
+            value="{{ obs.partner?.zip }}"
+          >
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" id="form6Example2" class="form-control" />
-        <label class="form-label" for="form6Example2">Cognome</label>
+      <!-- Città + Nazione -->
+      <div class="row mb-4">
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Città
+          </label>
+          <input
+            class="form-control"
+            id="city"
+            value="{{ obs.partner?.city }}"
+          >
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <label for="exampleFormControlInput1">
+            Nazione
+          </label>
+          <input
+            class="form-control"
+            id="country"
+            value="{{ obs.partner?.country }}"
+          >
+        </div>
       </div>
-    </div>
+      <!-- Sito Web + Email -->
+      <div class="row mb-4">
+        <div class="col">
+          <label for="inlineFormInputGroup">
+            Sito Web
+          </label>
+          <input
+            class="form-control"
+            id="webSite"
+            value="{{ obs.partner?.webSite }}"
+          >
+        </div>
+        <div class="col">
+          <label for="exampleFormControlInput1">
+            Email
+          </label>
+          <input
+              class="form-control"
+              id="email"
+              value="{{ obs.partner?.email }}"
+            >
+        </div>
+      </div>
+    
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-secondary w-100 mb-3 p-2">
+        Salva
+      </button>
+    </form>
   </div>
-
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="email" id="form6Example5" class="form-control" />
-    <label class="form-label" for="form6Example5">Email</label>
-  </div>
-
-  <!-- Number input -->
-  <div class="form-outline mb-4">
-    <input type="number" id="form6Example6" class="form-control" />
-    <label class="form-label" for="form6Example6">Phone</label>
-  </div>
-
-  <!-- Message input -->
-  <div class="form-outline mb-4">
-    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-    <label class="form-label" for="form6Example7">Additional information</label>
-  </div>
-
-  <!-- Checkbox -->
-  <div class="form-check d-flex justify-content-center mb-4">
-    <input class="form-check-input me-2" type="checkbox" value="" id="form6Example8" checked />
-    <label class="form-check-label" for="form6Example8"> Create an account? </label>
-  </div>
-
-  <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
-</form>
+</ng-container>
