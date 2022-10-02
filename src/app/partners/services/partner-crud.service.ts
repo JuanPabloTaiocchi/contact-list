@@ -11,7 +11,7 @@ export class partnerCrudService implements crudInterface<PartnerExtended>{
   ){
 
   }
-  public getAll(): Observable<PartnerExtended[]> {
+  public readAll(): Observable<PartnerExtended[]> {
     return this.partnerEntityService.entities$;
   }
 }
