@@ -12,173 +12,102 @@
       <!-- Nome e Cognome -->
       <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Nome
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'name') ? 'is-invalid' : '']"
-            id="name"
-            name="name"
-            formControlName="name"
-            value="{{ obs.partner?.name }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'name') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Nome', fieldId: 'name', fGroupForm}">
+          </ng-container>
         </div>
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Cognome
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'surname') ? 'is-invalid' : '']"
-            id="surname"
-            name="surname"
-            formControlName="surname"
-            value="{{ obs.partner?.surname }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'surname') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Cognome', fieldId: 'surname', fGroupForm}">
+          </ng-container>
         </div>
       </div>
       <!-- Numero di Telefono e Codice Fiscale -->
       <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Numero di Telefono
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'mobile') ? 'is-invalid' : '']"
-            id="mobile"
-            name="mobile"
-            formControlName="mobile"
-            value="{{ obs.partner?.mobile }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'mobile') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Numero di Telefono', fieldId: 'mobile', fGroupForm}">
+          </ng-container>
         </div>
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Codice Fiscale
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'fiscalCode') ? 'is-invalid' : '']"
-            id="fiscalCode"
-            name="fiscalCode"
-            formControlName="fiscalCode"
-            value="{{ obs.partner?.fiscalCode }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'fiscalCode') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Codice Fiscale', fieldId: 'fiscalCode', fGroupForm}">
+          </ng-container>
         </div>
       </div>
       <!-- Indirizzo e CAP -->
-      <div class="row mb-4" formGroupName="address">
+      <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Indirizzo
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'street') ? 'is-invalid' : '']"
-            id="street"
-            name="street"
-            formControlName="street"
-            value="{{ obs.partner?.street }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'street') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Indirizzo', fieldId: 'street', fGroupForm}">
+          </ng-container>
         </div>
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            CAP
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'zip') ? 'is-invalid' : '']"
-            id="zip"
-            name="zip"
-            formControlName="zip"
-            value="{{ obs.partner?.zip }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'zip') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'CAP', fieldId: 'zip', fGroupForm}">
+          </ng-container>
         </div>
       </div>
       <!-- Città + Nazione -->
       <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Città
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'city') ? 'is-invalid' : '']"
-            id="city"
-            name="city"
-            formControlName="city"
-            value="{{ obs.partner?.city }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'city') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Città', fieldId: 'city', fGroupForm}">
+          </ng-container>
         </div>
         <div class="col-sm-6 col-xs-12">
-          <label for="exampleFormControlInput1">
-            Nazione
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'country') ? 'is-invalid' : '']"
-            id="country"
-            name="country"
-            formControlName="country"
-            value="{{ obs.partner?.country }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'country') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Nazione', fieldId: 'country', fGroupForm}">
+          </ng-container>
         </div>
       </div>
       <!-- Sito Web + Email -->
       <div class="row mb-4">
         <div class="col">
-          <label for="inlineFormInputGroup">
-            Sito Web
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'webSite') ? 'is-invalid' : '']"
-            id="webSite"
-            name="webSite"
-            formControlName="webSite"
-            value="{{ obs.partner?.webSite }}"
-          >
-          <div [ngClass]="[isInvalid(fGroupForm, 'webSite') ? 'invalid-feedback' : 'd-none']">
-            {{ fieldErrorMessage }}
-          </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Sito Web', fieldId: 'webSite', fGroupForm}">
+          </ng-container>
         </div>
         <div class="col">
-          <label for="exampleFormControlInput1">
-            Email
-          </label>
-          <input
-            [ngClass]="['form-control', isInvalid(fGroupForm, 'email') ? 'is-invalid' : '']"
-            id="email"
-            name="email"
-            formControlName="email"
-            value="{{ obs.partner?.email }}"
-            >
-            <div [ngClass]="[isInvalid(fGroupForm, 'email') ? 'invalid-feedback' : 'd-none']">
-              {{ fieldErrorMessage }}
-            </div>
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Email', fieldId: 'email', fGroupForm}">
+          </ng-container>
         </div>
       </div>
-    
       <!-- Submit button -->
       <button type="submit" class="btn btn-secondary w-100 mb-3 p-2">
         Salva
       </button>
+      <!-- Single Form Field Template. Don't move it out: it must be within <form> -->
+        <ng-template
+        #formFieldTemplate
+        let-label="label"
+        let-fieldId="fieldId"
+        let-fGroupForm="fGroupForm"
+      >
+        <label for="exampleFormControlInput1">
+          {{ label }}
+        </label>
+        <input
+          [ngClass]="['form-control', isInvalid(fGroupForm, fieldId) ? 'is-invalid' : '']"
+          id="{{ fieldId }}"
+          name="{{ fieldId }}"
+          formControlName="{{ fieldId }}"
+        >
+        <div [ngClass]="[isInvalid(fGroupForm, fieldId) ? 'invalid-feedback' : 'd-none']">
+          {{ fieldErrorMessage }}
+        </div>
+      </ng-template>
     </form>
   </div>
 </ng-container>

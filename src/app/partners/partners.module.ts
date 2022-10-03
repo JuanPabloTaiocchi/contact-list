@@ -12,7 +12,6 @@ import { PartnerCrudService } from './services/partner-crud.service';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     PartnerTableComponent,
