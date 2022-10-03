@@ -11,17 +11,15 @@ import { crudInterface } from 'src/app/interfaces/crud-service.interface';
 @Injectable()
 export class PartnersDataService extends DefaultDataService<PartnerExtended>{
 
-
     constructor(http:HttpClient, httpUrlGenerator: HttpUrlGenerator) {
         super('Partner', http, httpUrlGenerator);
-
     }
 
     getAll(): Observable<PartnerExtended[]> {
         return this.http.get('/api/partners')
-            .pipe(
-                map((res: any) => res['partners'])
-            );
+        .pipe(
+            map((res: any) => res['partners'])
+        );
     }
 
 }
