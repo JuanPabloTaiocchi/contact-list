@@ -1,15 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PartnerTableComponent } from './components/partner-table/partner-table.component';
-import { PartnersResolver } from './services/partner.resolver';
+import { UpsertPartnerComponent } from './components/upsert-partner/upsert-partner.component';
+import { PartnersResolver } from './services/partners.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: PartnerTableComponent,
     resolve: {
-        courses: PartnersResolver
+      courses: PartnersResolver
     }
+  },
+  {
+    path: ':partnerId',
+    component: UpsertPartnerComponent
   }
 ];
 

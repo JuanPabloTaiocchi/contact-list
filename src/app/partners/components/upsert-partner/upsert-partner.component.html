@@ -23,7 +23,7 @@
             value="{{ obs.partner?.name }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'name') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -38,7 +38,7 @@
             value="{{ obs.partner?.surname }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'surname') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
             value="{{ obs.partner?.mobile }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'mobile') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -71,12 +71,12 @@
             value="{{ obs.partner?.fiscalCode }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'fiscalCode') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
       </div>
       <!-- Indirizzo e CAP -->
-      <div class="row mb-4">
+      <div class="row mb-4" formGroupName="address">
         <div class="col-sm-6 col-xs-12">
           <label for="exampleFormControlInput1">
             Indirizzo
@@ -89,7 +89,7 @@
             value="{{ obs.partner?.street }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'street') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -104,7 +104,7 @@
             value="{{ obs.partner?.zip }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'zip') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
       </div>
@@ -122,7 +122,7 @@
             value="{{ obs.partner?.city }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'city') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
         <div class="col-sm-6 col-xs-12">
@@ -137,7 +137,7 @@
             value="{{ obs.partner?.country }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'country') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
       </div>
@@ -155,7 +155,7 @@
             value="{{ obs.partner?.webSite }}"
           >
           <div [ngClass]="[isInvalid(fGroupForm, 'webSite') ? 'invalid-feedback' : 'd-none']">
-            Dato obbligatorio
+            {{ fieldErrorMessage }}
           </div>
         </div>
         <div class="col">
@@ -170,7 +170,7 @@
             value="{{ obs.partner?.email }}"
             >
             <div [ngClass]="[isInvalid(fGroupForm, 'email') ? 'invalid-feedback' : 'd-none']">
-              Dato obbligatorio
+              {{ fieldErrorMessage }}
             </div>
         </div>
       </div>

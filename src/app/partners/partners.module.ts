@@ -3,25 +3,34 @@ import { CommonModule } from '@angular/common';
 import { EntityCollectionServiceElementsFactory, EntityDataModule, EntityDataService, EntityDefinitionService } from '@ngrx/data';
 import { entityMetadata } from './entityMetadata';
 import { PartnerEntityService } from './services/partner-entity.service';
-import { PartnersResolver } from './services/partner.resolver';
+import { PartnersResolver } from './services/partners.resolver';
 import { PartnerTableComponent } from './components/partner-table/partner-table.component';
 import { PartnersRoutingModule } from './partners-routing.module';
 import { PartnersDataService } from './services/partners-data.service';
+import { UpsertPartnerComponent } from './components/upsert-partner/upsert-partner.component';
+import { PartnerCrudService } from './services/partner-crud.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    PartnerTableComponent
+    PartnerTableComponent,
+    UpsertPartnerComponent
   ],
   imports: [
     CommonModule,
-    PartnersRoutingModule
+    PartnersRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     PartnerEntityService,
+    PartnersDataService,
     PartnersResolver,
-    PartnersDataService
+    PartnerCrudService
+  ],
+  entryComponents: [
+    UpsertPartnerComponent
   ]
 })
 export class PartnersModule {

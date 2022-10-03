@@ -38,15 +38,18 @@
                 type="button"
                 class="btn btn-link btn-rounded btn-sm fw-bold"
                 mdbRipple rippleColor="dark"
+                (click)="openEditPartnerModal(partner.id)"
                 >
-          Edit
+          Modifica
         </button>
         <button
                 type="button"
                 class="btn btn-link btn-rounded btn-sm fw-bold"
-                mdbRipple rippleColor="dark"
+                mdbRipple
+                rippleColor="dark"
+                (click)="openCancelPartnerModal(partner.id)"
                 >
-          Delete
+          Cancella
         </button>
       </td>
     </tr>

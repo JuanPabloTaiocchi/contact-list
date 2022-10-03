@@ -19,6 +19,7 @@ export class UpsertPartnerComponent implements OnInit {
   partner$: Observable<PartnerExtended> | undefined;
   formTitle = this.mode === 'create' ? 'Creazione Utente' : 'Modifica Utente';
   form!: FormGroup;
+  fieldErrorMessage = 'Dato assente o Non corretto';
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -38,20 +39,25 @@ export class UpsertPartnerComponent implements OnInit {
       name: ['', Validators.required],
       surname: ['', Validators.required],
       street: ['', Validators.required],
-      zip: ['', Validators.required],
+      zip: ['', [
+        Validators.required,
+        Validators.pattern("^[0-9]*$"),
+        Validators.minLength(5),
+      ]],
       city: ['', Validators.required],
       country: ['', Validators.required],
       webSite: ['', Validators.required],
       vat: ['', Validators.required],
       fiscalCode: ['', Validators.required],
-      mobile: ['', Validators.required],
-      email: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern("^[0-9]*$"),]],
+      email: ['', [Validators.required, Validators.email]],
     }, { updateOn: 'submit'});
   }
 
   /**
-   * Validatore di ogni singolo campo considerato obbligatorio nel form html.
-   * @param fieldName: nome del campo da esaminare (e.g. ''warehouse')
+   * Validation of each field in the form.
+   * I'ts triggered only if was clicked submit button
+   * @param fieldName: field name to examine
    * @returns: true se devo evidenziare il fatto che sia obbligatorio
    */
    isInvalid(form: FormGroupDirective, fieldName: string): boolean{
