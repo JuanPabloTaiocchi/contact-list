@@ -5,7 +5,15 @@ import { Upsert } from 'src/app/interfaces/upsert.interface';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
 import { PartnerCrudService } from '../../services/partner-crud.service';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { first, tap } from 'rxjs/operators';
 
+
+/**
+ * Partner Upsert form
+ * @Input partnerId: the partner id, present if in edit mode
+ * @Input fb: FormBuilder service, present because can't inject directly via ng-bootstrap
+ * @Input partnerCrudService: partnerCrudService service, present because can't inject directly via ng-bootstrap
+ */
 @Component({
   selector: 'app-upsert-partner',
   templateUrl: './upsert-partner.component.html',
@@ -13,11 +21,10 @@ import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular
 })
 export class UpsertPartnerComponent implements OnInit {
   @Input() partnerId!: string;
-  @Input() mode!: Upsert;
   @Input() fb!: FormBuilder;
   @Input() partnerCrudService!: PartnerCrudService;
   partner$: Observable<PartnerExtended> | undefined;
-  formTitle = this.mode === 'create' ? 'Creazione Utente' : 'Modifica Utente';
+  formTitle = this.isEditMode() ? 'Creazione Utente' : 'Modifica Utente';
   form!: FormGroup;
   fieldErrorMessage = 'Dato assente o Non corretto';
 
@@ -27,30 +34,40 @@ export class UpsertPartnerComponent implements OnInit {
 
   ngOnInit(): void {
     this.triggerEvents();
-    this.initializeForm();
   }
 
-  triggerEvents(){
-    this.partner$ = this.partnerCrudService.getEntity(this.partnerId);
+  /**
+   * In case of edit mode, fetch partner data otherwise do nothing
+   */  
+  triggerEvents(): void{
+    if(!this.isEditMode){ return; }
+    this.partner$ = this.partnerCrudService.getEntity(this.partnerId).pipe(
+      first(),
+      tap((partner: PartnerExtended) => this.initializeForm(partner))
+    );
   }
 
-  initializeForm(){
+  /**
+   * Initialize partner form
+   * @param partner: The partner, in case of edit mode
+   */
+  initializeForm(partner?: PartnerExtended): void{
     this.form = this.fb.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      street: ['', Validators.required],
-      zip: ['', [
+      name: [ partner?.name ?? '', Validators.required],
+      surname: [ partner?.surname ?? '', Validators.required],
+      street: [ partner?.street ?? '', Validators.required],
+      zip: [ partner?.zip ?? '', [
         Validators.required,
         Validators.pattern("^[0-9]*$"),
         Validators.minLength(5),
       ]],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
-      webSite: ['', Validators.required],
-      vat: ['', Validators.required],
-      fiscalCode: ['', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern("^[0-9]*$"),]],
-      email: ['', [Validators.required, Validators.email]],
+      city: [ partner?.city ?? '', Validators.required],
+      country: [ partner?.country ?? '', Validators.required],
+      webSite: [ partner?.webSite ?? '', Validators.required],
+      vat: [ partner?.vat ?? '', Validators.required],
+      fiscalCode: [ partner?.fiscalCode ?? '', Validators.required],
+      mobile: [ partner?.mobile ?? '', [Validators.required, Validators.pattern("^[0-9]*$"),]],
+      email: [partner?.email ?? '', [Validators.required, Validators.email]],
     }, { updateOn: 'submit'});
   }
 
@@ -69,6 +86,13 @@ export class UpsertPartnerComponent implements OnInit {
 
   onSubmit(){
     console.log("Foo!");
+  }
+
+  /**
+   * If there is a partnerId, it's in edit mode
+   */
+  isEditMode(): boolean{
+    return !!(this.partnerId);
   }
 
 }
