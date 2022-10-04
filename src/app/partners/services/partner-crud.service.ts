@@ -1,22 +1,33 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
-import { first, map, mergeMap } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { crudInterface } from "src/app/interfaces/crud-service.interface";
 import { PartnerExtended } from "src/models/PartnerExtended.model";
 import { PartnerEntityService } from "./partner-entity.service";
 
+
+/**
+ * For small/medium applications, it's better to use ngrx/data to manage CRUD operations.
+ * If you have more data change this service! (DI)
+ */
 @Injectable()
 export class PartnerCrudService implements crudInterface<PartnerExtended>{
   constructor(
-    private partnerEntityService: PartnerEntityService
-  ){
+    private genericPartnerES: PartnerEntityService
+  ){}
 
-  }
   public readAll(): Observable<PartnerExtended[]> {
-    return this.partnerEntityService.readAll();
+    return this.genericPartnerES.readAll();
   }
 
-  public getEntity(partnerId: string): Observable<PartnerExtended> {
-    return this.partnerEntityService.getEntity(partnerId);
+  public get(partnerId: string): Observable<PartnerExtended> {
+    return this.genericPartnerES.get(partnerId);
+  }
+
+  public create(partner: PartnerExtended): Observable<PartnerExtended> {
+    return this.genericPartnerES.create(partner);
+  }
+
+  public update(partner: PartnerExtended): Observable<PartnerExtended> {
+    return this.genericPartnerES.update(partner);
   }
 }

@@ -6,7 +6,7 @@ import { crudInterface } from "src/app/interfaces/crud-service.interface";
 import { PartnerExtended } from "src/models/PartnerExtended.model";
 
 @Injectable()
-export class PartnerEntityService extends EntityCollectionServiceBase<PartnerExtended> 
+export class PartnerEntityService extends EntityCollectionServiceBase<PartnerExtended>
   implements crudInterface<PartnerExtended> {
   constructor(serviceElementsFacory: EntityCollectionServiceElementsFactory){
     super('Partner', serviceElementsFacory);
@@ -16,7 +16,12 @@ export class PartnerEntityService extends EntityCollectionServiceBase<PartnerExt
     return this.entities$;
   }
 
-  public getEntity(partnerId: string): Observable<PartnerExtended> {
+  /**
+   * 
+   * @param partnerId This is an adapter in order to satisfy the crudInterface
+   * @returns 
+   */
+  public get(partnerId: string): Observable<PartnerExtended> {
     return this.entities$.pipe(
       first(),
       map((partners: PartnerExtended[]) => partners.find((partner: PartnerExtended) => partner.id === partnerId)),
@@ -25,6 +30,10 @@ export class PartnerEntityService extends EntityCollectionServiceBase<PartnerExt
         return this.getByKey(partnerId);
       })
     );
+  }
+
+  public create(partner: PartnerExtended): Observable<PartnerExtended> {
+    return this.add(partner);
   }
 
 }
