@@ -36,4 +36,10 @@ export class PartnersDataService extends DefaultDataService<PartnerExtended>{
         return this.http.put<PartnerExtended>(`/api/partner/${id}`, {partner: {...changes}});
     }
 
+    getById(id: string | number): Observable<PartnerExtended> {
+        return this.http.get<PartnerExtended>(`/api/partner/${id}`).pipe(
+            map((response) => response.partner)
+        );
+    }
+
 }

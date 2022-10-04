@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
 import { PartnerEntityService } from '../../services/partner-entity.service';
@@ -17,6 +17,7 @@ import { getHttpErrorMessage } from 'src/app/utils/http';
 })
 export class PartnerTableComponent implements OnInit {
   @Input() partners: PartnerExtended[] | undefined;
+  @Output() onCancel = new EventEmitter<void>();
   getPartnerStringFn: (partner: PartnerExtended) => string = getPartnerString; // used within template, DON'T REMOVE ME!
 
   constructor(
@@ -56,7 +57,7 @@ export class PartnerTableComponent implements OnInit {
    */
    handleSuccessOperation(): void{
     // TODO: Write a generic modal in order to ask for a confirmation of canceling or not
-    console.log('All fine!');
+    this.onCancel.emit();
    }
 
 }

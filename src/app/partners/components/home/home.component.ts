@@ -61,4 +61,8 @@ export class HomeComponent implements AfterViewInit {
     this.menuWrapper.pushNewQueryWrapper(true);
   }
 
+  onCancel(){
+    this.menuWrapper.pushNewQueryWrapper(true);
+  }
+
 }
