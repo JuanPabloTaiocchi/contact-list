@@ -20,12 +20,12 @@ import { getHttpErrorMessage } from 'src/app/utils/http';
   styleUrls: ['./upsert-partner.component.css']
 })
 export class UpsertPartnerComponent implements OnInit {
-  @Input() partnerId!: string;
+  @Input() partnerId: string | undefined;
   @Input() fb!: FormBuilder;
   @Input() partnerCrudService!: PartnerCrudService;
   // TODO: Add an emitter in order to manage Edit/Cancel effects in the parent component
   @Output()
-  partner$: Observable<PartnerExtended> | undefined;
+  initialize$: Observable<PartnerExtended | void> | undefined;
   formTitle = this.isEditMode() ? 'Creazione Utente' : 'Modifica Utente';
   form!: FormGroup;
   fieldErrorMessage = 'Dato assente o Non corretto';
@@ -42,8 +42,10 @@ export class UpsertPartnerComponent implements OnInit {
    * In case of edit mode, fetch partner data otherwise do nothing
    */  
   triggerEvents(): void{
-    if(!this.isEditMode){ return; }
-    this.partner$ = this.partnerCrudService.get(this.partnerId).pipe(
+    if(!this.isEditMode()){
+      return this.initializeForm();
+    }
+    this.initialize$ = this.partnerCrudService.get(this.partnerId!).pipe(
       first(),
       tap((partner: PartnerExtended) => this.initializeForm(partner))
     );
