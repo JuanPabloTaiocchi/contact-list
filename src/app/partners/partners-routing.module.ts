@@ -8,9 +8,9 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    resolve: {
-      courses: PartnersResolver
-    }
+    // resolve: {
+    //   courses: PartnersResolver
+    // }
   },
   {
     path: ':partnerId',

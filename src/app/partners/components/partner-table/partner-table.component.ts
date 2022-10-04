@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
 import { PartnerEntityService } from '../../services/partner-entity.service';
@@ -16,23 +16,16 @@ import { getHttpErrorMessage } from 'src/app/utils/http';
   styleUrls: ['./partner-table.component.css']
 })
 export class PartnerTableComponent implements OnInit {
-  partners$: Observable<PartnerExtended[]> | undefined;
+  @Input() partners: PartnerExtended[] | undefined;
   getPartnerStringFn: (partner: PartnerExtended) => string = getPartnerString; // used within template, DON'T REMOVE ME!
 
   constructor(
-    private partnerEntityService: PartnerEntityService,
     private modalService: NgbModal,
     private partnerCrudService: PartnerCrudService,
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit(): void {
-    this.triggerEvents();
-  }
-
-  triggerEvents(){
-    this.partners$ = this.partnerEntityService.readAll();
-  }
+  ngOnInit(): void {}
 
   /**
    * Open edit bootstrap modal.
@@ -62,6 +55,7 @@ export class PartnerTableComponent implements OnInit {
    * Handle Modal Closing
    */
    handleSuccessOperation(): void{
+    // TODO: Write a generic modal in order to ask for a confirmation of canceling or not
     console.log('All fine!');
    }
 

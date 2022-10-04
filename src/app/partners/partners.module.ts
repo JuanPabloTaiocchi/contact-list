@@ -11,6 +11,7 @@ import { UpsertPartnerComponent } from './components/upsert-partner/upsert-partn
 import { PartnerCrudService } from './services/partner-crud.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
+import { PaginationModule } from '../pagination/pagination.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     CommonModule,
     PartnersRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationModule
   ],
   providers: [
     PartnerEntityService,
