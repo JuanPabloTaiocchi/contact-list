@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
+import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
 
 
 @Injectable()
@@ -19,9 +20,10 @@ export class PartnersDataService extends DefaultDataService<PartnerExtended>{
         );
     }
 
-    add(partner: PartnerExtended): Observable<PartnerExtended> {
-        return super.add(partner).pipe(
-            tap((response: any) => console.log(response))
+    add(partner: Partial<PartnerExtended>): Observable<PartnerExtended> {
+        // super.add(partner);
+        return this.http.post<PartnerExtended>(`/api/partner`, {partner: {...partner}}).pipe(
+            map((response) => response.partner)
         );
     }
 
