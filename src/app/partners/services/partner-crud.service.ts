@@ -30,4 +30,8 @@ export class PartnerCrudService implements crudInterface<PartnerExtended>{
   public update(partner: PartnerExtended): Observable<PartnerExtended> {
     return this.genericPartnerES.update(partner);
   }
+
+  public delete(partnerId: string): Observable<string | number> {
+    return this.genericPartnerES.delete(partnerId as string);
+  }
 }
