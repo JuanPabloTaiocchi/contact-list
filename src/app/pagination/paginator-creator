@@ -1,0 +1,19 @@
+import { HttpPaginator } from './httpPaginator';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Paginator } from './interfaces/paginator.interface';
+import { Modality } from './interfaces/modality.interface';
+
+
+@Injectable()
+export class PaginatorCreator{
+
+    constructor(
+        private http: HttpClient
+    ){}
+
+    getInstance(paginatorType: Modality): Paginator{
+        // if (paginatorType === Modality.sqlite){ return new SqlPaginator(this.syncService); }
+        return new HttpPaginator(this.http);
+    }
+}
