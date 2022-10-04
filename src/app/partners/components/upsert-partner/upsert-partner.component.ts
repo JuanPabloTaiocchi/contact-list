@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
-import { Upsert } from 'src/app/interfaces/upsert.interface';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
 import { PartnerCrudService } from '../../services/partner-crud.service';
 import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { first, tap } from 'rxjs/operators';
+import { getHttpErrorMessage } from 'src/app/utils/http';
 
 
 /**
@@ -23,6 +23,7 @@ export class UpsertPartnerComponent implements OnInit {
   @Input() partnerId!: string;
   @Input() fb!: FormBuilder;
   @Input() partnerCrudService!: PartnerCrudService;
+  // TODO: Add an emitter in order to manage Edit/Cancel effects in the parent component
   @Output()
   partner$: Observable<PartnerExtended> | undefined;
   formTitle = this.isEditMode() ? 'Creazione Utente' : 'Modifica Utente';
@@ -95,16 +96,8 @@ export class UpsertPartnerComponent implements OnInit {
     const $operation = this.isEditMode() ? this.partnerCrudService.update(data) : this.partnerCrudService.create(data);
     $operation.pipe(first()).subscribe(
       () => this.handleSuccessOperation(),
-      (e: unknown) => console.log(this.handleErrorMessage())
+      (e: unknown) => console.log(getHttpErrorMessage(e))
     );
-  }
-
-  /**
-   * Handle Error Message
-   * @returns error message
-   */
-  handleErrorMessage(): string{
-    return 'Qualcosa è andato storto';
   }
 
   /**
