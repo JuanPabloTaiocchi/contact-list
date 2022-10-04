@@ -1,11 +1,11 @@
 import { createServer, Model, RestSerializer, Server } from 'miragejs';
+import { apiPartnerRoutes } from 'src/api-routes';
 import { RouteMirage } from 'src/mirage/models/RouteMirage.model';
 import { partnerFactory } from './factories/Partner';
-import { getPartnerRoutes } from './routes/Partner';
 import { partnerSeed } from './seeds/Partner';
 
 // All endpoints
-const allRoutes = [...getPartnerRoutes()];
+const allRoutes = apiPartnerRoutes;
 // All models
 const allModels = { partner: Model };
 // All factories
