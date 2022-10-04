@@ -8,8 +8,9 @@ import { Route } from "./models/Route.model";
 
 export const apiPartnerRoutes: Route[] = [
   { method: 'get', path: '/partners' },
-  { method: 'get', path: '/partners/:id' },
-  { method: 'post', path: '/partners' },
+  { method: 'get', path: '/partner/:id' },
+  { method: 'post', path: '/partner' },
   { method: 'patch', path: '/partners/:id' },
-  { method: 'del', path: '/partners/:id' },
+  { method: 'del', path: '/partner/:id' },
+  { method: 'put', path: '/partner/:id'}
 ]

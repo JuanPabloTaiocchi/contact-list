@@ -1,4 +1,4 @@
-import { createServer, Model, Registry, RestSerializer, Server } from 'miragejs';
+import { createServer, Model, RestSerializer, Server } from 'miragejs';
 import { RouteMirage } from 'src/mirage/models/RouteMirage.model';
 import { partnerFactory } from './factories/Partner';
 import { getPartnerRoutes } from './routes/Partner';
@@ -33,6 +33,9 @@ export function makeServer({ environment = "test" } = {}) {
         (route: RouteMirage) => this[route.method](route.path, route.callback)
       );
     },
+    serializers: {
+      application: RestSerializer
+    }
   })
 }
 
