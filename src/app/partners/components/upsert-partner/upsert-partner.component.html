@@ -24,6 +24,15 @@
           </ng-container>
         </div>
       </div>
+      <!-- Foto URL -->
+      <div class="row mb-4">
+        <div class="col-sm-12 col-xs-12">
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Foto URL', fieldId: 'photo', fGroupForm}">
+          </ng-container>
+        </div>
+      </div>
       <!-- Numero di Telefono e Codice Fiscale -->
       <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">

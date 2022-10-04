@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Upsert } from 'src/app/interfaces/upsert.interface';
@@ -9,7 +9,7 @@ import { first, tap } from 'rxjs/operators';
 
 
 /**
- * Partner Upsert form
+ * Partner Upsert form: it only validates the form and use a crud service to to CRUD operations (DI)
  * @Input partnerId: the partner id, present if in edit mode
  * @Input fb: FormBuilder service, present because can't inject directly via ng-bootstrap
  * @Input partnerCrudService: partnerCrudService service, present because can't inject directly via ng-bootstrap
@@ -23,6 +23,7 @@ export class UpsertPartnerComponent implements OnInit {
   @Input() partnerId!: string;
   @Input() fb!: FormBuilder;
   @Input() partnerCrudService!: PartnerCrudService;
+  @Output()
   partner$: Observable<PartnerExtended> | undefined;
   formTitle = this.isEditMode() ? 'Creazione Utente' : 'Modifica Utente';
   form!: FormGroup;
@@ -41,7 +42,7 @@ export class UpsertPartnerComponent implements OnInit {
    */  
   triggerEvents(): void{
     if(!this.isEditMode){ return; }
-    this.partner$ = this.partnerCrudService.getEntity(this.partnerId).pipe(
+    this.partner$ = this.partnerCrudService.get(this.partnerId).pipe(
       first(),
       tap((partner: PartnerExtended) => this.initializeForm(partner))
     );
@@ -49,12 +50,14 @@ export class UpsertPartnerComponent implements OnInit {
 
   /**
    * Initialize partner form
+   * `updateOn: 'submit'` is used to avoid validation on each keypress
    * @param partner: The partner, in case of edit mode
    */
   initializeForm(partner?: PartnerExtended): void{
     this.form = this.fb.group({
       name: [ partner?.name ?? '', Validators.required],
       surname: [ partner?.surname ?? '', Validators.required],
+      photo: [partner?.photo ?? '', [Validators.required]],
       street: [ partner?.street ?? '', Validators.required],
       zip: [ partner?.zip ?? '', [
         Validators.required,
@@ -84,9 +87,30 @@ export class UpsertPartnerComponent implements OnInit {
     return this.form.get(fieldName)!.invalid;
   }
 
-  onSubmit(){
-    console.log("Foo!");
+  onSubmit(): void{
+    const data: PartnerExtended = {
+      ...this.form.value,
+      ...(this.isEditMode() && { id: this.partnerId }),
+    };
+    const $operation = this.isEditMode() ? this.partnerCrudService.update(data) : this.partnerCrudService.create(data);
+    $operation.pipe(first()).subscribe(
+      () => this.handleSuccessOperation(),
+      (e: unknown) => console.log(this.handleErrorMessage())
+    );
   }
+
+  /**
+   * Handle Error Message
+   * @returns error message
+   */
+  handleErrorMessage(): string{
+    return 'Qualcosa è andato storto';
+  }
+
+  /**
+   * Handle Modal Closing
+   */
+  handleSuccessOperation(): void{ this.activeModal.dismiss(); }
 
   /**
    * If there is a partnerId, it's in edit mode
