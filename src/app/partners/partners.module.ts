@@ -10,12 +10,14 @@ import { PartnersDataService } from './services/partners-data.service';
 import { UpsertPartnerComponent } from './components/upsert-partner/upsert-partner.component';
 import { PartnerCrudService } from './services/partner-crud.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './components/home/home.component';
 
 
 @NgModule({
   declarations: [
     PartnerTableComponent,
-    UpsertPartnerComponent
+    UpsertPartnerComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
