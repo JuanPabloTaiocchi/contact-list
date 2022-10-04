@@ -5,6 +5,6 @@ export interface PaginationResponse {
   params?: string;
   count: number;
   hasMore: boolean;
-  items: any[];
+  partners: any[];
   forceSearchReset?: boolean;
 }

@@ -3,5 +3,4 @@ export interface Query{
     offset: number;
     limit: number;
     url: string;
-    httpBodyParameters: any;
 }

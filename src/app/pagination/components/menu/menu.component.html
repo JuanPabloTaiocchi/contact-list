@@ -1,0 +1,17 @@
+<div class="btn-group" role="group" aria-label="menu-pagination">  
+  <button (click)="prev()" [disabled]="prevIsDisabled()" type="button"
+    [ngClass]="['btn', prevIsDisabled() ? 'btn-secondary' : 'btn-primary']">
+    <i class="bi bi-arrow-left"></i>
+      Prec.
+  </button>
+  <button (click)="refresh()" [disabled]="loading" type="button"
+    [ngClass]="['btn', loading ? 'btn-secondary' : 'btn-primary']">
+    <i class="bi bi-arrow-repeat"></i>
+      Aggiorna
+  </button>
+  <button (click)="next()" [disabled]="nextIsDisabled()" type="button"
+    [ngClass]="['btn', nextIsDisabled() ? 'btn-secondary' : 'btn-primary']">
+    <i class="bi bi-arrow-right"></i>
+      Succ.
+  </button>
+</div>
