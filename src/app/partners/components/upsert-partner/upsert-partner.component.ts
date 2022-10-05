@@ -88,6 +88,9 @@ export class UpsertPartnerComponent implements OnInit {
     return this.form.get(fieldName)!.invalid;
   }
 
+  /**
+   * Trigger create/edit call (only if form is valid)
+   */
   onSubmit(): void{
     if(!this.form.valid){ return; }
     const data: PartnerExtended = {
