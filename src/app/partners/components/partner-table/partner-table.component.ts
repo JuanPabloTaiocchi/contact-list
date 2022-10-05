@@ -1,21 +1,23 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
-import { PartnerEntityService } from '../../services/partner-entity.service';
 import { getPartnerString } from '../../../../models/PartnerExtended.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UpsertPartnerComponent } from '../upsert-partner/upsert-partner.component';
 import { PartnerCrudService } from '../../services/partner-crud.service';
 import { FormBuilder } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { getHttpErrorMessage } from 'src/app/utils/http';
 
+
+/**
+ * This components only render a partner list and trigger emitter for cancel and update events (it's a slave component).
+ * @Input partners: partners to be rendered
+ * @Output onCancel: cancel partner event emitter
+ * @Output onEdit: edit partner event emitter
+ */
 @Component({
   selector: 'app-partner-table',
   templateUrl: './partner-table.component.html',
   styleUrls: ['./partner-table.component.css']
 })
-export class PartnerTableComponent implements OnInit {
+export class PartnerTableComponent {
   @Input() partners: PartnerExtended[] | undefined;
   @Output() onCancel = new EventEmitter<string>();
   @Output() onEdit = new EventEmitter<string>();
@@ -27,16 +29,18 @@ export class PartnerTableComponent implements OnInit {
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit(): void {}
-
   /**
-   * Open edit bootstrap modal.
+   * Trigger the edit event emitter
    * @param partnerId: id of the partner to be edited.
    */
   openEditPartnerModal(partnerId: string): void{
     this.onEdit.emit(partnerId);
   }
 
+  /**
+   * Trigger the cancel event emitter
+   * @param partnerId: id of the partner to be edited.
+   */
   openCancelPartnerModal(partnerId: string): void{
     this.onCancel.emit(partnerId);
   }
