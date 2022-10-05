@@ -12,13 +12,15 @@ import { PartnerCrudService } from './services/partner-crud.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { PaginationModule } from '../pagination/pagination.module';
+import { LoadingComponent } from '../components/loading/loading.component';
 
 
 @NgModule({
   declarations: [
     PartnerTableComponent,
     UpsertPartnerComponent,
-    HomeComponent
+    HomeComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,

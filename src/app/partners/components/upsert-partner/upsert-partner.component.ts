@@ -23,8 +23,6 @@ export class UpsertPartnerComponent implements OnInit {
   @Input() partnerId: string | undefined;
   @Input() fb!: FormBuilder;
   @Input() partnerCrudService!: PartnerCrudService;
-  // TODO: Add an emitter in order to manage Edit/Cancel effects in the parent component
-  @Output()
   initialize$: Observable<PartnerExtended | void> | undefined;
   formTitle = this.isEditMode() ? 'Creazione Utente' : 'Modifica Utente';
   form!: FormGroup;
@@ -105,7 +103,7 @@ export class UpsertPartnerComponent implements OnInit {
   /**
    * Handle Modal Closing
    */
-  handleSuccessOperation(): void{ this.activeModal.dismiss(); }
+  handleSuccessOperation(): void{ this.activeModal.close(); }
 
   /**
    * If there is a partnerId, it's in edit mode

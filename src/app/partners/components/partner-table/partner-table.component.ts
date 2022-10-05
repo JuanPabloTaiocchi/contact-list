@@ -17,7 +17,8 @@ import { getHttpErrorMessage } from 'src/app/utils/http';
 })
 export class PartnerTableComponent implements OnInit {
   @Input() partners: PartnerExtended[] | undefined;
-  @Output() onCancel = new EventEmitter<void>();
+  @Output() onCancel = new EventEmitter<string>();
+  @Output() onEdit = new EventEmitter<string>();
   getPartnerStringFn: (partner: PartnerExtended) => string = getPartnerString; // used within template, DON'T REMOVE ME!
 
   constructor(
@@ -33,31 +34,11 @@ export class PartnerTableComponent implements OnInit {
    * @param partnerId: id of the partner to be edited.
    */
   openEditPartnerModal(partnerId: string): void{
-    const modalRef = this.modalService.open(
-      UpsertPartnerComponent,
-      {size: 'lg'}
-    );
-    modalRef.componentInstance.partnerId = partnerId;
-    modalRef.componentInstance.mode = 'edit';
-    modalRef.componentInstance.partnerCrudService = this.partnerCrudService;
-    modalRef.componentInstance.fb = this.formBuilder;
+    this.onEdit.emit(partnerId);
   }
 
   openCancelPartnerModal(partnerId: string): void{
-    this.partnerCrudService.delete(partnerId).pipe(
-      first()
-    ).subscribe(
-      () => this.handleSuccessOperation(),
-      (e: unknown) => console.log(getHttpErrorMessage(e))
-    );
+    this.onCancel.emit(partnerId);
   }
-
-  /**
-   * Handle Modal Closing
-   */
-   handleSuccessOperation(): void{
-    // TODO: Write a generic modal in order to ask for a confirmation of canceling or not
-    this.onCancel.emit();
-   }
 
 }
