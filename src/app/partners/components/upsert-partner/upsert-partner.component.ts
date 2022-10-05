@@ -89,6 +89,7 @@ export class UpsertPartnerComponent implements OnInit {
   }
 
   onSubmit(): void{
+    if(!this.form.valid){ return; }
     const data: PartnerExtended = {
       ...this.form.value,
       ...(this.isEditMode() && { id: this.partnerId }),
