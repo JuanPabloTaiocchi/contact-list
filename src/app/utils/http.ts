@@ -12,3 +12,7 @@ export const getHttpErrorMessage = (error: any) => {
   // TODO: Gestire tutte le casistiche di errore
   return 'Errore sconosciuto';
 };
+
+export const getApiNamespace = (): string =>{
+  return 'api';
+}

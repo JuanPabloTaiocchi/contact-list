@@ -1,5 +1,6 @@
 import { createServer, Model, RestSerializer, Server } from 'miragejs';
 import { apiPartnerRoutes } from 'src/api-routes';
+import { getApiNamespace } from 'src/app/utils/http';
 import { RouteMirage } from 'src/mirage/models/RouteMirage.model';
 import { partnerFactory } from './factories/Partner';
 import { partnerSeed } from './seeds/Partner';
@@ -27,7 +28,7 @@ export function makeServer({ environment = "test" } = {}) {
      */
     routes() {
       // (1)
-      this.namespace = 'api';
+      this.namespace = getApiNamespace();
       // (2)
       allRoutes.map(
         (route: RouteMirage) => this[route.method](route.path, route.callback)

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {DefaultDataService, HttpUrlGenerator} from '@ngrx/data';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { PartnerExtended } from 'src/models/PartnerExtended.model';
-import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
+import { getApiNamespace } from 'src/app/utils/http';
 
 
 @Injectable()
@@ -22,7 +22,7 @@ export class PartnersDataService extends DefaultDataService<PartnerExtended>{
 
     add(partner: Partial<PartnerExtended>): Observable<PartnerExtended> {
         // super.add(partner);
-        return this.http.post<PartnerExtended>(`/api/partner`, {partner: {...partner}}).pipe(
+        return this.http.post<PartnerExtended>(`/${getApiNamespace()}/partner`, {partner: {...partner}}).pipe(
             map((response) => response.partner)
         );
     }
@@ -33,11 +33,11 @@ export class PartnersDataService extends DefaultDataService<PartnerExtended>{
      */
     update({id, changes}: {id: string, changes: PartnerExtended}): Observable<PartnerExtended> {
         // TODO: Avoid namespace with an interceptor
-        return this.http.put<PartnerExtended>(`/api/partner/${id}`, {partner: {...changes}});
+        return this.http.put<PartnerExtended>(`/${getApiNamespace()}/partner/${id}`, {partner: {...changes}});
     }
 
     getById(id: string | number): Observable<PartnerExtended> {
-        return this.http.get<PartnerExtended>(`/api/partner/${id}`).pipe(
+        return this.http.get<PartnerExtended>(`/${getApiNamespace()}/partner/${id}`).pipe(
             map((response) => response.partner)
         );
     }
