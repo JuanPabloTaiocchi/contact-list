@@ -37,6 +37,8 @@ Example:
 - Everything should be docked in a separate container.
 - Test missing
 
+## BUGS
+Unfortunately, precisely because there are no tests, something could go wrong. The focus I wanted to give is the structure
 
 ## Development server
 
