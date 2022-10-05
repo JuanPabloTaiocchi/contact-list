@@ -31,7 +31,11 @@ Example:
     private genericPartnerES: OtherFavoriteServiceImplementation
   ){...}
 ```
-The project needs many little/big things (view TODOS)
+
+## TODOS
+- The project needs many little/big things (view TODOS).
+- Everything should be docked in a separate container.
+- Test missing
 
 
 ## Development server
