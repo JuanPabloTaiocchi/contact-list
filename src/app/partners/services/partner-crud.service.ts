@@ -27,7 +27,7 @@ export class PartnerCrudService implements crudInterface<PartnerExtended>{
     return this.genericPartnerES.create(partner);
   }
 
-  public update(partner: PartnerExtended): Observable<PartnerExtended> {
+  public update(partner: Partial<PartnerExtended>): Observable<PartnerExtended> {
     return this.genericPartnerES.update(partner);
   }
 

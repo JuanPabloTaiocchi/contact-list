@@ -93,15 +93,40 @@ export class UpsertPartnerComponent implements OnInit {
    */
   onSubmit(): void{
     if(!this.form.valid){ return; }
-    const data: PartnerExtended = {
-      ...this.form.value,
-      ...(this.isEditMode() && { id: this.partnerId }),
-    };
-    const $operation = this.isEditMode() ? this.partnerCrudService.update(data) : this.partnerCrudService.create(data);
+    const data = this.getFormData();
+    const $operation = this.isEditMode() ? 
+      this.partnerCrudService.update(data) : this.partnerCrudService.create(data as PartnerExtended);
     $operation.pipe(first()).subscribe(
       () => this.handleSuccessOperation(),
       (e: unknown) => console.log(getHttpErrorMessage(e))
     );
+  }
+
+  /**
+   * Get form data. I in edit mode take only updated fields otherwise all
+   */
+  getFormData(): Partial<PartnerExtended> | PartnerExtended{
+    const formData = this.isEditMode() ? this.getOnlyChangedFields() : this.form.value;
+    return {
+      ...formData,
+      ...(this.isEditMode() && { id: this.partnerId }),
+    };
+  }
+
+  /**
+   * 
+   * @returns Take only the fields that have been changed
+   */
+  getOnlyChangedFields(): Partial<PartnerExtended>{
+    // TODO: I don't like this, it should be better
+    const allFormFields = Object.keys(this.form.controls);
+    const fieldsChangedNames: string[] = allFormFields.filter((x) => {
+      return this.form.get(x)?.dirty
+    });
+    const asArray = Object.entries(this.form.value);
+    const filtered = asArray.filter(([key, value]) => fieldsChangedNames.includes(key));
+    const g = Object.fromEntries(filtered);
+    return Object.fromEntries(filtered);
   }
 
   /**
