@@ -9,16 +9,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 <img src="./src/assets/home-contact-list.png" width=600px height=auto>
 <br/>
 
-BackendApis are implemented via Mirage.
-I chose it instead of JSON Server because Mirage mock out the exact shape of your production API and because it and I've never used it.
+**BackendApis** are implemented via MirageJS.
+I chose it instead of JSON Server because Mirage mock out the exact shape of a production API and because I've never used it.
 
 The frontend toolkit choosed is Bootstrap (required from Icert)
 
 I have included the partner functionality in a separate module in order to use it separatly anywhere.
-In this folder i have created many subfolders (components/ interfaces...).
+In this folder I have created many subfolders (components/ interfaces...).
 In my mind every feature/functionality of an app must have its folder.
+In the 'src/components' folder there are general components that are not closely related to a functionality.
 
-The Pagination feature is implemented via factory pattern [view here](./src/app/pagination/services/PaginatorFactory.ts): different pagination methods can be implemented (e.g sqlite/http...).
+The Pagination feature is implemented via factory pattern [view here](./src/app/pagination/services/PaginatorFactory.ts):
+[refactoring.guru](https://refactoring.guru/)
+ different pagination methods can be implemented (e.g sqlite/http...).
 The important thing is to implement correctly interfaces [view here](./src/app/pagination/interfaces/Paginator.interface.ts).
 
 
@@ -33,12 +36,12 @@ Example:
 ```
 
 ## TODOS
-- The project needs many little/big things (view TODOS).
-- Everything should be docked in a separate container.
+- The project needs many little/big things (view all TODOS).
+- Everything should be dockered in a separate container.
 - Test missing
 
 ## BUGS
-Unfortunately, precisely because there are no tests, something could go wrong. The focus I wanted to give is the structure
+Unfortunately, precisely because there are no tests, something could go wrong. The focus I wanted to give is the structure.
 
 ## Development server
 
