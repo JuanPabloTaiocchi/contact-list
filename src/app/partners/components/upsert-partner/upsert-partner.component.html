@@ -33,6 +33,15 @@
           </ng-container>
         </div>
       </div>
+      <!-- Partita IVA -->
+      <div class="row mb-4">
+        <div class="col-sm-6 col-xs-12">
+          <ng-container
+            [ngTemplateOutlet]="formFieldTemplate"
+            [ngTemplateOutletContext]="{label: 'Partita IVA', fieldId: 'vat', fGroupForm}">
+          </ng-container>
+        </div>
+      </div>
       <!-- Numero di Telefono e Codice Fiscale -->
       <div class="row mb-4">
         <div class="col-sm-6 col-xs-12">
@@ -94,7 +103,8 @@
         </div>
       </div>
       <!-- Submit button -->
-      <button type="submit" class="btn btn-primary w-100 mb-3 p-2">
+      <button type="submit"
+        [ngClass]="['btn', 'btn-primary', 'w-100', 'mb-3', 'p-2']">
         Salva
       </button>
       <!-- Single Form Field Template. Don't move it out: it must be within <form> -->
