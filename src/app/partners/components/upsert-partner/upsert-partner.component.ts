@@ -114,8 +114,8 @@ export class UpsertPartnerComponent implements OnInit {
   }
 
   /**
-   * 
-   * @returns Take only the fields that have been changed
+   * Take only the fields that have been changed in the form (edit mode)
+   * @returns fields changed
    */
   getOnlyChangedFields(): Partial<PartnerExtended>{
     // TODO: I don't like this, it should be better
@@ -125,7 +125,6 @@ export class UpsertPartnerComponent implements OnInit {
     });
     const asArray = Object.entries(this.form.value);
     const filtered = asArray.filter(([key, value]) => fieldsChangedNames.includes(key));
-    const g = Object.fromEntries(filtered);
     return Object.fromEntries(filtered);
   }
 
